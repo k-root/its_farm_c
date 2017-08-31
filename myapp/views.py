@@ -58,8 +58,9 @@ def retrievehousehold_detail(request,pk):
 
 def retrievemember_detail(request,pk):
 	i=pk
-	url = "http://kr00t.pythonanywhere.com/member/"+str(i)+"/?format=json"
+	url = "http://kr00t.pythonanywhere.com/memberid/"+str(i)+"/?format=json"
 	response=urllib.urlopen(url)
 	data = response.read()
 	return HttpResponse(data)
 
+	
