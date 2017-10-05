@@ -16,6 +16,13 @@ import requests
 def index(request):
 	return HttpResponse('<h2>The Index of Myapp..</h2>')
 
+
+def maps(request):
+	markers1=[{'lat':-33.7772, 'long':151.1241}]
+	return render(request, 'myapp/abc.html',{'point':markers1})
+
+
+
 class HouseHoldList(APIView):
 	def get(self, request):
 		hhlist = HouseHold.objects.all()
@@ -63,4 +70,25 @@ def retrievemember_detail(request,pk):
 	data = response.read()
 	return HttpResponse(data)
 
-	
+def retrieveabc(request):
+	url = "http://10.0.3.23:8989/maplist/?format=json"
+	response=urllib.urlopen(url)
+	jsondata=json.loads(response.read())
+
+	url_farmer="http://10.0.3.23:8989/farmer/?format=json"
+	response_farmer=urllib.urlopen(url_farmer)
+	jsondata_farmer=json.loads(response_farmer.read())
+
+	url_farm="http://10.0.3.23:8989/farms/?format=json"
+	response_farm=urllib.urlopen(url_farm)
+	jsondata_farm=json.loads(response_farm.read())
+
+	url_household="http://10.0.3.23:8989/household/?format=json"
+	response_household=urllib.urlopen(url_household)
+	jsondata_household=json.loads(response_household.read())
+
+	url_wells="http://10.0.3.23:8989/wells/?format=json"
+	response_wells=urllib.urlopen(url_wells)
+	jsondata_wells=json.loads(response_wells.read())
+
+	return render(request, 'myapp/abc.html',{'points':jsondata,'wells':jsondata_wells , 'farmers':jsondata_farmer, 'farms':jsondata_farm, 'houses':jsondata_household})

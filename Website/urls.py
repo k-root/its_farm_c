@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^retrievefarmer/', views.retrieve_farmer, name='retrieve_farmer'),
     url(r'^retrievehousehold/', views.retrieve_household, name='retrieve_household'),
     url(r'^retrievemember/', views.retrieve_member, name='retrieve_member'),
+    url(r'^retrieveabc/', views.retrieveabc, name='retrieveabc'),
 
 
 ]
